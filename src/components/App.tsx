@@ -30,7 +30,7 @@ export class App extends React.Component<unknown, IState> {
   };
 
   handleFeedback = (event: React.MouseEvent<HTMLButtonElement>): void => {
-    const { name } = event.target as EventTarget & { name: keyof IState };
+    const { name } = event.target as EventTarget & { name: keyof IState }; //TODO: Розібратись
 
     this.setState(ps => {
       return { [name]: ps[name] + 1 } as Readonly<IState>;
