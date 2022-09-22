@@ -5,9 +5,9 @@ import { Notification } from './Notification/Notification';
 import React from 'react';
 
 interface IState {
-  good: number,
-  neutral: number,
-  bad: number
+  good: number;
+  neutral: number;
+  bad: number;
 }
 
 export class App extends React.Component<unknown, IState> {
@@ -25,7 +25,7 @@ export class App extends React.Component<unknown, IState> {
   };
 
   countPositiveFeedbackPercentage = (): number => {
-    const result = this.state.good * 100 / this.countTotalFeedback();
+    const result = (this.state.good * 100) / this.countTotalFeedback();
     return Math.round(result);
   };
 
@@ -39,15 +39,23 @@ export class App extends React.Component<unknown, IState> {
 
   render(): JSX.Element {
     const { good, neutral, bad } = this.state;
-    return (<>
-        <Section title='Please leave feedback'>
+    return (
+      <>
+        <Section title="Please leave feedback">
           <FeedbackOptions onLeaveFeedback={this.handleFeedback} options={Object.keys(this.state)} />
         </Section>
-        <Section title='Statistics'>
-          {this.countTotalFeedback() !== 0 ?
-            <Statistics good={good} neutral={neutral} bad={bad} total={this.countTotalFeedback()}
-                        percentage={this.countPositiveFeedbackPercentage()} /> :
-            <Notification message='There is no feedback'></Notification>}
+        <Section title="Statistics">
+          {this.countTotalFeedback() !== 0 ? (
+            <Statistics
+              good={good}
+              neutral={neutral}
+              bad={bad}
+              total={this.countTotalFeedback()}
+              percentage={this.countPositiveFeedbackPercentage()}
+            />
+          ) : (
+            <Notification message="There is no feedback" />
+          )}
         </Section>
       </>
     );
